@@ -7,7 +7,15 @@ const loginRoutes = require("./src/routes/loginroutes")
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors());
+const corsOptions = {
+  origin: "https://formsuser.netlify.app",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
